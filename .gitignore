@@ -1,0 +1,46 @@
+# ==========================================
+# Pastas e arquivos temporários do Unity
+# ==========================================
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+
+# ==========================================
+# Arquivos de IDEs e Editores (VS Code, Visual Studio, JetBrains)
+# ==========================================
+.vs/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.opendb
+*.VC.db
+
+# ==========================================
+# Arquivos temporários do Sistema Operacional
+# ==========================================
+.DS_Store
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# ==========================================
+# Builds exportadas
+# ==========================================
+*.apk
+*.aab
+*.unitypackage
