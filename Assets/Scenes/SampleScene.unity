@@ -310,11 +310,8 @@ MonoBehaviour:
   - 2
   - 3
   - 3.5
-  - 4
+  tempoAzul:
   - 5
-  - 6
-  - 7
-  tempoAzul: []
 --- !u!4 &224179288
 Transform:
   m_ObjectHideFlags: 0
