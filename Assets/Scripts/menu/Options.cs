@@ -91,11 +91,11 @@
 
                 //Navegação dos sliders
                 float moveValue = 0f;
-                if(Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasPressedThisFrame) {
-                    moveValue = 5f;
+                if(Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed) {
+                    moveValue = 1.5f;
                 }
-                if(Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasPressedThisFrame) {
-                    moveValue = -5f;
+                if(Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed) {
+                    moveValue = -1.5f;
                 }
 
                 if(moveValue != 0f) {
