@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 74fe96fdcc1c257eeaaea9e74969e14a
+guid: 9d1a63d30fd873dc4b6c81b2033e8f8e
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Rammetto One
+  - Saira Condensed
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

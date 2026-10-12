@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 638ef75a9109e561787fcfac80ff7709
+guid: 9ebdac94552736be9b3525474e32c322
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Special Gothic Expanded One
+  - Saira Condensed
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
