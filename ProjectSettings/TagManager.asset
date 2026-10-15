@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Massa
+  - MassaVermelha
+  - MassaAzul
   layers:
   - Default
   - TransparentFX
