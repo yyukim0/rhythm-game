@@ -57,7 +57,7 @@ public class Amassar : MonoBehaviour
         for (int i = massasIndoProLixo.Count - 1; i >= 0; i--) {
             GameObject massas = massasIndoProLixo[i];
             if (massas != null) {
-                massas.transform.Translate(0f, 0f, -0.01f);
+                massas.transform.Translate(0.01f, 0f, -0.05f);
             }
         }
 
