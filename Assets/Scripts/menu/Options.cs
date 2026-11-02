@@ -9,7 +9,7 @@ using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class Options : MonoBehaviour
-{
+{                   //start é o "groovar"
     public TMP_Text start, options, exit, textOptions, volumeOptions, brightnessOptions, exitOptions, pressAnyKeyText;
     public Slider volumeSlider, brightnessSlider;
     public CanvasGroup brightnessOverlay;
@@ -20,16 +20,19 @@ public class Options : MonoBehaviour
     public TMP_FontAsset fontRegular;
     public TMP_FontAsset fontLight;
 
-    private bool isOption = false;
+    private bool isOption = false; // flag que diz se a parte de opções está ativa no menu
     private bool isStarted = false; // flag que diz se o player apertou um botão ou não logo no inicio
+    private bool isMenuReady = false; // trava para o menu só aceitar inputs e atualizar o visual após o fade acabar
 
     public RectTransform backgroundMenu;
     public float speedTransitionMenu;
+    public Image menuTop, menuBottom, deSelectedGroove, deSelectedOptions, deSelectedExit, selectedGroove, selectedOptions, selectedExit;
 
     void Start()
     {
         Cursor.visible = false;
 
+        //recupera o valor salvo do brilho e já deixa iniciado como 50%
         float savedBrightness = PlayerPrefs.GetFloat("BrightnessValue", 50f);
         if (brightnessSlider != null) {
             brightnessSlider.value = savedBrightness;
@@ -41,9 +44,10 @@ public class Options : MonoBehaviour
             volumeSlider.value = savedVolume;
         }
         SetAudioVolume(savedVolume);
-
-        SetupInitialState();
         
+        //esconde os elementos na tela no inicioj
+        SetupInitialState();
+        //faz o texto de apertar qualquer tecla piscar
         if (pressAnyKeyText != null)
         {
             pressAnyKeyText.DOFade(0.2f, 0.8f).SetLoops(-1, LoopType.Yoyo);
@@ -69,7 +73,7 @@ public class Options : MonoBehaviour
                 ShowMainMenu();
             }
         }
-        if(isStarted) {
+        if(isStarted && isMenuReady) {
             DetectInput();
             if (!isOption)
             {
@@ -88,6 +92,17 @@ public class Options : MonoBehaviour
         options.gameObject.SetActive(false);
         exit.gameObject.SetActive(false);
 
+        if (menuTop != null) menuTop.gameObject.SetActive(false);
+        if (menuBottom != null) menuBottom.gameObject.SetActive(false);
+
+        if (deSelectedGroove != null) deSelectedGroove.gameObject.SetActive(false);
+        if (deSelectedOptions != null) deSelectedOptions.gameObject.SetActive(false);
+        if (deSelectedExit != null) deSelectedExit.gameObject.SetActive(false);
+
+        if (selectedGroove != null) selectedGroove.gameObject.SetActive(false);
+        if (selectedOptions != null) selectedOptions.gameObject.SetActive(false);
+        if (selectedExit != null) selectedExit.gameObject.SetActive(false);
+
         textOptions.gameObject.SetActive(false);
         volumeOptions.gameObject.SetActive(false);
         brightnessOptions.gameObject.SetActive(false);
@@ -99,20 +114,49 @@ public class Options : MonoBehaviour
 
     void ShowMainMenu()
     {
+        isMenuReady = false;
+
         // Ativa os textos do menu principal com alfa 0 e faz o Fade In de 0.8 segundos
         start.gameObject.SetActive(true);
         options.gameObject.SetActive(true);
         exit.gameObject.SetActive(true);
+        menuTop.gameObject.SetActive(true);
+        menuBottom.gameObject.SetActive(true);
 
+        selectedGroove.gameObject.SetActive(true);
+        selectedOptions.gameObject.SetActive(false);
+        selectedExit.gameObject.SetActive(false);
+
+        deSelectedGroove.gameObject.SetActive(false);
+        deSelectedOptions.gameObject.SetActive(true);
+        deSelectedExit.gameObject.SetActive(true);
+
+        selectedOption = 0;
+        
         start.alpha = 0f;
         options.alpha = 0f;
         exit.alpha = 0f;
 
-        start.DOFade(1f, 0.8f);
-        options.DOFade(1f, 0.8f);
-        exit.DOFade(1f, 0.8f);
+        if (menuTop != null) { Color c = menuTop.color; c.a = 0f; menuTop.color = c; }
+        if (menuBottom != null) { Color c = menuBottom.color; c.a = 0f; menuBottom.color = c; }
+        
+        if (selectedGroove != null) { Color c = selectedGroove.color; c.a = 0f; selectedGroove.color = c; }
+        if (deSelectedOptions != null) { Color c = deSelectedOptions.color; c.a = 0f; deSelectedOptions.color = c; }
+        if (deSelectedExit != null) { Color c = deSelectedExit.color; c.a = 0f; deSelectedExit.color = c; }
 
-        // Garante que o painel de opções está oculto
+        start.DOFade(1f, 1f);
+        options.DOFade(1f, 1f);
+        exit.DOFade(1f, 1f);
+        menuTop.DOFade(1f, 1f);
+        menuBottom.DOFade(1f, 1f);
+        selectedGroove.DOFade(1f, 1f);
+        deSelectedOptions.DOFade(1f, 1f);
+        deSelectedExit.DOFade(1f, 1f).OnComplete(() => {
+            isMenuReady = true; 
+            VisualMenu();
+        });
+
+        // garante que o painel de opções está oculto
         textOptions.gameObject.SetActive(false);
         volumeOptions.gameObject.SetActive(false);
         brightnessOptions.gameObject.SetActive(false);
@@ -131,6 +175,16 @@ public class Options : MonoBehaviour
             start.gameObject.SetActive(false);
             options.gameObject.SetActive(false);
             exit.gameObject.SetActive(false);
+            menuTop.gameObject.SetActive(false);
+            menuBottom.gameObject.SetActive(false);
+
+            selectedGroove.gameObject.SetActive(false);
+            selectedOptions.gameObject.SetActive(false);
+            selectedExit.gameObject.SetActive(false);
+
+            deSelectedGroove.gameObject.SetActive(false);
+            deSelectedOptions.gameObject.SetActive(false);
+            deSelectedExit.gameObject.SetActive(false);
 
             // Ativa opções
             textOptions.gameObject.SetActive(true);
@@ -143,10 +197,11 @@ public class Options : MonoBehaviour
             brightnessOptions.alpha = 0f;
             exitOptions.alpha = 0f;
 
-            textOptions.DOFade(1f, 0.6f);
-            volumeOptions.DOFade(1f, 0.6f);
-            brightnessOptions.DOFade(1f, 0.6f);
-            exitOptions.DOFade(1f, 0.6f);
+            textOptions.DOFade(1f, 1f);
+            volumeOptions.DOFade(1f, 1f);
+            brightnessOptions.DOFade(1f, 1f);
+            exitOptions.DOFade(1f, 1f);
+            menuTop.DOFade(1f, 1f);
 
             if (volumeSlider != null) volumeSlider.gameObject.SetActive(true);
             if (brightnessSlider != null) brightnessSlider.gameObject.SetActive(true);
@@ -155,11 +210,15 @@ public class Options : MonoBehaviour
 
     void HideOptionsScreen()
     {
+        // Trava o menu durante a transição de retorno
+        isMenuReady = false;
+
         // Faz Fade Out das opções e retorna para o menu principal
         textOptions.DOFade(0f, 0.4f);
         volumeOptions.DOFade(0f, 0.4f);
         brightnessOptions.DOFade(0f, 0.4f);
         exitOptions.DOFade(0f, 0.4f).OnComplete(() => {
+            // Desativa os elementos de opções
             textOptions.gameObject.SetActive(false);
             volumeOptions.gameObject.SetActive(false);
             brightnessOptions.gameObject.SetActive(false);
@@ -168,30 +227,22 @@ public class Options : MonoBehaviour
             if (volumeSlider != null) volumeSlider.gameObject.SetActive(false);
             if (brightnessSlider != null) brightnessSlider.gameObject.SetActive(false);
 
-            // Reativa o menu principal com Fade In
-            start.gameObject.SetActive(true);
-            options.gameObject.SetActive(true);
-            exit.gameObject.SetActive(true);
+            // Só agora sai do modo opções, depois que o fade out acabou
+            isOption = false;
 
-            start.alpha = 0f;
-            options.alpha = 0f;
-            exit.alpha = 0f;
-
-            start.DOFade(1f, 0.6f);
-            options.DOFade(1f, 0.6f);
-            exit.DOFade(1f, 0.6f);
+            ShowMainMenu();
         });
     }
 
     void DetectInput() 
     {
         if(!isOption){
-            if (Keyboard.current.downArrowKey.wasPressedThisFrame || Keyboard.current.sKey.wasPressedThisFrame) 
+            if (Keyboard.current.rightArrowKey.wasPressedThisFrame || Keyboard.current.dKey.wasPressedThisFrame) 
             {
                 selectedOption++;
                 if(selectedOption > 2) selectedOption = 0;
             } 
-            if (Keyboard.current.upArrowKey.wasPressedThisFrame || Keyboard.current.wKey.wasPressedThisFrame) 
+            if (Keyboard.current.leftArrowKey.wasPressedThisFrame || Keyboard.current.aKey.wasPressedThisFrame) 
             {
                 selectedOption--;
                 if(selectedOption < 0) selectedOption = 2;
@@ -296,13 +347,44 @@ public class Options : MonoBehaviour
 
     void VisualMenu() 
     {
-        start.font = fontLight;
-        options.font = fontLight;
-        exit.font = fontLight;
+        if(selectedOption == 0) {
+            selectedGroove.gameObject.SetActive(true);
+            selectedOptions.gameObject.SetActive(false);
+            selectedExit.gameObject.SetActive(false);
+        
+            deSelectedGroove.gameObject.SetActive(false);
+            deSelectedOptions.gameObject.SetActive(true);
+            deSelectedExit.gameObject.SetActive(true);
+        }
 
-        if(selectedOption == 0) start.font = fontRegular;
-        if(selectedOption == 1) options.font = fontRegular;
-        if(selectedOption == 2) exit.font = fontRegular;
+        if(selectedOption == 1) {
+            selectedGroove.gameObject.SetActive(false);
+            selectedOptions.gameObject.SetActive(true);
+            selectedExit.gameObject.SetActive(false);
+        
+            deSelectedGroove.gameObject.SetActive(true);
+            deSelectedOptions.gameObject.SetActive(false);
+            deSelectedExit.gameObject.SetActive(true);
+        }
+
+        if(selectedOption == 2) {
+            selectedGroove.gameObject.SetActive(false);
+            selectedOptions.gameObject.SetActive(false);
+            selectedExit.gameObject.SetActive(true);
+        
+            deSelectedGroove.gameObject.SetActive(true);
+            deSelectedOptions.gameObject.SetActive(true);
+            deSelectedExit.gameObject.SetActive(false);
+        }
+
+        //não usar isso, essa parte era apenas para mudar a fonte se selecionado, porém estamos usando imagens agora
+        // start.font = fontLight;
+        // options.font = fontLight;
+        // exit.font = fontLight;
+
+        // if(selectedOption == 0) start.font = fontRegular;
+        // if(selectedOption == 1) options.font = fontRegular;
+        // if(selectedOption == 2) exit.font = fontRegular;
     }
 
     void InsideMenu() {
@@ -329,7 +411,6 @@ public class Options : MonoBehaviour
     {
         if(selectedOption == 2) 
         {
-            isOption = false;
             selectedOption = 1;
             HideOptionsScreen();
         }
@@ -337,12 +418,13 @@ public class Options : MonoBehaviour
 
     void VisualMenuOptions() 
     {
-        volumeOptions.font = fontLight;
-        brightnessOptions.font = fontLight;
-        exitOptions.font = fontLight;
+        //não usar isso, essa parte era apenas para mudar a fonte se selecionado, porém estamos usando imagens agora
+        // volumeOptions.font = fontLight;
+        // brightnessOptions.font = fontLight;
+        // exitOptions.font = fontLight;
 
-        if(selectedOption == 0) volumeOptions.font = fontRegular;
-        if(selectedOption == 1) brightnessOptions.font = fontRegular;
-        if(selectedOption == 2) exitOptions.font = fontRegular;
+        // if(selectedOption == 0) volumeOptions.font = fontRegular;
+        // if(selectedOption == 1) brightnessOptions.font = fontRegular;
+        // if(selectedOption == 2) exitOptions.font = fontRegular;
     }
 }   
