@@ -24,9 +24,10 @@ public class Options : MonoBehaviour
     private bool isStarted = false; // flag que diz se o player apertou um botão ou não logo no inicio
     private bool isMenuReady = false; // trava para o menu só aceitar inputs e atualizar o visual após o fade acabar
 
-    public RectTransform backgroundMenu;
+    public RectTransform backgroundMenu, backgroundOptions, telaAmarela;
     public float speedTransitionMenu;
     public Image menuTop, menuBottom, deSelectedGroove, deSelectedOptions, deSelectedExit, selectedGroove, selectedOptions, selectedExit;
+    public Image greenLine, yellowLine, blackLine, pinkBackground;
 
     void Start()
     {
@@ -63,10 +64,13 @@ public class Options : MonoBehaviour
                 pressAnyKeyText.DOKill();
                 pressAnyKeyText.DOFade(0f, 0.3f).OnComplete(() => pressAnyKeyText.gameObject.SetActive(false));
             }
-            if (backgroundMenu != null) 
+            if (telaAmarela != null) 
             {
-                backgroundMenu.DOAnchorPosY(0f, speedTransitionMenu).SetEase(Ease.InQuart).OnComplete(() => { //background sobe
-                    ShowMainMenu(); //e após subir manda o resto dos fade in nos botões
+                telaAmarela.DOAnchorPosY(0f, speedTransitionMenu).SetEase(Ease.InQuart).OnComplete(() => { //background sobe
+                    DOVirtual.DelayedCall(2f, () => {
+                        telaAmarela.DOAnchorPosY(-1080f, speedTransitionMenu).SetEase(Ease.InQuart);
+                        ShowMainMenu(); //e após subir manda o resto dos fade in nos botões
+                    });
                 });
             }
             else {
@@ -117,6 +121,9 @@ public class Options : MonoBehaviour
         isMenuReady = false;
 
         // Ativa os textos do menu principal com alfa 0 e faz o Fade In de 0.8 segundos
+
+        backgroundMenu.gameObject.SetActive(true);
+
         start.gameObject.SetActive(true);
         options.gameObject.SetActive(true);
         exit.gameObject.SetActive(true);
@@ -143,6 +150,10 @@ public class Options : MonoBehaviour
         if (selectedGroove != null) { Color c = selectedGroove.color; c.a = 0f; selectedGroove.color = c; }
         if (deSelectedOptions != null) { Color c = deSelectedOptions.color; c.a = 0f; deSelectedOptions.color = c; }
         if (deSelectedExit != null) { Color c = deSelectedExit.color; c.a = 0f; deSelectedExit.color = c; }
+        if (deSelectedGroove != null) { Color c = deSelectedGroove.color; c.a = 1f; deSelectedGroove.color = c; }
+        if (selectedOptions != null) { Color c = selectedOptions.color; c.a = 1f; selectedOptions.color = c; }
+        if (selectedExit != null) { Color c = selectedExit.color; c.a = 1f; selectedExit.color = c; }
+        
 
         start.DOFade(1f, 1f);
         options.DOFade(1f, 1f);
@@ -171,6 +182,11 @@ public class Options : MonoBehaviour
         // Faz Fade Out do menu principal e depois ativa o menu de opções com Fade In
         start.DOFade(0f, 0.4f);
         options.DOFade(0f, 0.4f);
+        menuTop.DOFade(0f, 0.4f);
+        menuBottom.DOFade(0f, 0.4f);
+        deSelectedGroove.DOFade(0f, 0.4f);
+        selectedOptions.DOFade(0f, 0.4f);
+        deSelectedExit.DOFade(0f, 0.4f);
         exit.DOFade(0f, 0.4f).OnComplete(() => {
             start.gameObject.SetActive(false);
             options.gameObject.SetActive(false);
@@ -186,6 +202,12 @@ public class Options : MonoBehaviour
             deSelectedOptions.gameObject.SetActive(false);
             deSelectedExit.gameObject.SetActive(false);
 
+            greenLine.rectTransform.DOAnchorPosX(0f, 2f).SetEase(Ease.InQuart).SetDelay(0.3f);
+            yellowLine.rectTransform.DOAnchorPosX(0f, 2f).SetEase(Ease.InQuart).SetDelay(0.5f);
+            blackLine.rectTransform.DOAnchorPosX(0f, 2f).SetEase(Ease.InQuart).SetDelay(0.7f);
+            pinkBackground.rectTransform.DOAnchorPosX(0f, 2f).SetEase(Ease.InQuart).SetDelay(0.9f);
+
+            backgroundOptions.gameObject.SetActive(true);
             // Ativa opções
             textOptions.gameObject.SetActive(true);
             volumeOptions.gameObject.SetActive(true);
@@ -197,14 +219,15 @@ public class Options : MonoBehaviour
             brightnessOptions.alpha = 0f;
             exitOptions.alpha = 0f;
 
-            textOptions.DOFade(1f, 1f);
-            volumeOptions.DOFade(1f, 1f);
-            brightnessOptions.DOFade(1f, 1f);
-            exitOptions.DOFade(1f, 1f);
-            menuTop.DOFade(1f, 1f);
+            textOptions.DOFade(1f, 1f).SetDelay(3f);
+            volumeOptions.DOFade(1f, 1f).SetDelay(3f);
+            brightnessOptions.DOFade(1f, 1f).SetDelay(3f);
+            exitOptions.DOFade(1f, 1f).SetDelay(3f);
+            menuTop.DOFade(1f, 1f).SetDelay(3f);
 
             if (volumeSlider != null) volumeSlider.gameObject.SetActive(true);
-            if (brightnessSlider != null) brightnessSlider.gameObject.SetActive(true);
+            if (brightnessSlider != null) brightnessSlider.gameObject.SetActive(true);                
+        
         });
     }
 
@@ -214,10 +237,16 @@ public class Options : MonoBehaviour
         isMenuReady = false;
 
         // Faz Fade Out das opções e retorna para o menu principal
-        textOptions.DOFade(0f, 0.4f);
-        volumeOptions.DOFade(0f, 0.4f);
-        brightnessOptions.DOFade(0f, 0.4f);
-        exitOptions.DOFade(0f, 0.4f).OnComplete(() => {
+        textOptions.DOFade(0f, 0.4f).SetDelay(0.8f);
+        volumeOptions.DOFade(0f, 0.4f).SetDelay(0.8f);
+        brightnessOptions.DOFade(0f, 0.4f).SetDelay(0.8f);
+        exitOptions.DOFade(0f, 0.4f).SetDelay(0.8f);
+        greenLine.rectTransform.DOAnchorPosX(1633f, 2f).SetEase(Ease.InQuart).SetDelay(0.3f);
+        yellowLine.rectTransform.DOAnchorPosX(1633f, 2f).SetEase(Ease.InQuart).SetDelay(0.5f);
+        blackLine.rectTransform.DOAnchorPosX(1633f, 2f).SetEase(Ease.InQuart).SetDelay(0.7f);
+        pinkBackground.rectTransform.DOAnchorPosX(1633f, 2f).SetEase(Ease.InQuart).SetDelay(0.9f).OnComplete(() => {
+            backgroundOptions.gameObject.SetActive(false);
+            
             // Desativa os elementos de opções
             textOptions.gameObject.SetActive(false);
             volumeOptions.gameObject.SetActive(false);
