@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MassaVermelha
   - MassaAzul
+  - Alimento
   layers:
   - Default
   - TransparentFX
