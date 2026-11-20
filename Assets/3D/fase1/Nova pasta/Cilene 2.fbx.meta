@@ -3,7 +3,32 @@ guid: a04feeb79b68eea3080b62384d133ddf
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cilene
+    second: {fileID: 2100000, guid: 30d0946997e3a41419a26b985e1e1f93, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "La\xE7o"
+    second: {fileID: 2100000, guid: b47ac748edf4ec84883a565506982ae2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 12d78e4875e20ad4697534b3f8490ae4, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Cilene_2D_View
+    second: {fileID: 2800000, guid: a0ae91983e00de642a20ca787a28634b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: "la\xE7o"
+    second: {fileID: 2800000, guid: 33bfafb7192e2174fab3497a85312f8d, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

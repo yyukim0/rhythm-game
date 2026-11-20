@@ -3,7 +3,17 @@ guid: b9f708ce56628f9febc1dc6175fa643a
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cenario
+    second: {fileID: 2100000, guid: e4e2a7a665266344ea5f8dff00cbe1e0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "Ch\xE3o"
+    second: {fileID: 2100000, guid: d9bb1d94402acff49965d1eec0044063, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
