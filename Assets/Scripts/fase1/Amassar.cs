@@ -19,21 +19,21 @@ public class Amassar : MonoBehaviour
         pontuacao = 0;
     }
 
-    private void OnTriggerEnter(Collider bater)
+    private void OnTriggerEnter(Collider other)
     {
-        if (bater.CompareTag("MassaVermelha") || bater.CompareTag("MassaAzul"))
+        if (other.CompareTag("MassaVermelha") || other.CompareTag("MassaAzul"))
         {
-            if(!massasNoTrigger.Contains(bater.gameObject)) {
-                massasNoTrigger.Add(bater.gameObject);
+            if(!massasNoTrigger.Contains(other.gameObject)) {
+                massasNoTrigger.Add(other.gameObject);
             }
         }
     }
 
-    private void OnTriggerExit(Collider bater)
+    private void OnTriggerExit(Collider other)
     {
-        if (bater.CompareTag("MassaVermelha") || bater.CompareTag("MassaAzul"))
+        if (other.CompareTag("MassaVermelha") || other.CompareTag("MassaAzul"))
         {
-            GameObject massaSaindo = bater.gameObject;
+            GameObject massaSaindo = other.gameObject;
 
             if(massasNoTrigger.Contains(massaSaindo)) {
                 bool foiAmassada = massasAmassadas.Contains(massaSaindo);
@@ -64,7 +64,7 @@ public class Amassar : MonoBehaviour
 
                 if (rb != null)
                 {
-                    rb.MovePosition(rb.position + Vector3.back * 0.025f);
+                    rb.MovePosition(rb.position + Vector3.back * 0.07f);
                 }
             }
         }

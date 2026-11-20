@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MassaVermelha
   - MassaAzul
+  - parede
   layers:
   - Default
   - TransparentFX
