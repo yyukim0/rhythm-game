@@ -54,10 +54,18 @@ public class Amassar : MonoBehaviour
     {
         txtPontuacao.text = pontuacao.ToString();
         
-        for (int i = massasIndoProLixo.Count - 1; i >= 0; i--) {
+        for (int i = massasIndoProLixo.Count - 1; i >= 0; i--)
+        {
             GameObject massas = massasIndoProLixo[i];
-            if (massas != null) {
-                massas.transform.Translate(0.01f, 0f, -0.05f);
+
+            if (massas != null)
+            {
+                Rigidbody rb = massas.GetComponent<Rigidbody>();
+
+                if (rb != null)
+                {
+                    rb.MovePosition(rb.position + Vector3.back * 0.025f);
+                }
             }
         }
 
@@ -74,8 +82,11 @@ public class Amassar : MonoBehaviour
                     pontuacao -= 50;
                 }
                 
-                massasIndoProLixo.Add(massaAtual);
-                massasNoTrigger.Remove(massaAtual);
+                if (!massasIndoProLixo.Contains(massaAtual))
+                {
+                    massasIndoProLixo.Add(massaAtual);
+                    massasNoTrigger.Remove(massaAtual);
+                }
                 
                 Debug.Log("jogou no lixo!");
             }
