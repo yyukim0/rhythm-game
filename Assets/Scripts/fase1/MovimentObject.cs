@@ -18,11 +18,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
         if (tempoDeVida < 6f)
         {
-            rb.MovePosition(rb.position + transform.right * -0.01f);
+            rb.MovePosition(rb.position + transform.right * 0.03f);
         }
+        /*
         else
         {
             rb.MovePosition(rb.position + Vector3.back * 0.01f);
-        }
+        }*/
     }
 }
