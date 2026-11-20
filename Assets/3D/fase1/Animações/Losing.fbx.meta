@@ -1,0 +1,486 @@
+fileFormatVersion: 2
+guid: 096967b735cddb813802a07f2fd34a8a
+ModelImporter:
+  serializedVersion: 24600
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+    searchTexturesGlobally: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    preBakeConvexCollisionMesh: 0
+    preBakeTriangleCollisionMesh: 0
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    importUVs: -1
+    importVertexColors: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+    calculateBlendshapeNormalsDeltaFromImportedNormals: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: Losing(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature.001
+      parentName: Losing(Clone)
+      position: {x: 0, y: 0.58475506, z: 0}
+      rotation: {x: -0.7071067, y: -0.000000030908616, z: 0.000000030908623, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Perna.R
+      parentName: Armature.001
+      position: {x: 0.0013805345, y: 0.000555162, z: 0.00045724926}
+      rotation: {x: -0.5442168, y: -0.4514732, z: 0.5442168, w: 0.45147333}
+      scale: {x: 1.0000017, y: 1.0000042, z: 1.0000013}
+    - name: Perna.001.R
+      parentName: Perna.R
+      position: {x: -4.1034873e-11, y: 0.0024777823, z: 1.1450509e-10}
+      rotation: {x: -0.00000008940697, y: -0.00000008940697, z: -0.21045816, w: 0.9776029}
+      scale: {x: 1.0000001, y: 1.0000013, z: 1.0000011}
+    - name: Perna.002.R
+      parentName: Perna.001.R
+      position: {x: 1.1115837e-10, y: 0.0025844835, z: 1.0857537e-11}
+      rotation: {x: -0.00021235333, y: -0.00017915471, z: 0.45598596, w: 0.889987}
+      scale: {x: 1.0000103, y: 0.9999999, z: 1.0000031}
+    - name: Perna.003.R
+      parentName: Perna.002.R
+      position: {x: 2.3233951e-10, y: 0.0015469695, z: -1.0941221e-11}
+      rotation: {x: -0.0002462355, y: -0.000000092622926, z: -0.41785672, w: -0.9085129}
+      scale: {x: 0.9999898, y: 1.0000136, z: 1.0000035}
+    - name: Perna.L
+      parentName: Armature.001
+      position: {x: -0.0013805345, y: 0.000555162, z: 0.00045724926}
+      rotation: {x: 0.5442168, y: -0.4514732, z: 0.5442168, w: -0.45147333}
+      scale: {x: 1.0000017, y: 1.0000061, z: 1.0000029}
+    - name: Perna.001.L
+      parentName: Perna.L
+      position: {x: -6.735098e-11, y: 0.0024777823, z: -2.391785e-10}
+      rotation: {x: -0.00000008940696, y: 0.00000008940696, z: 0.21045819, w: 0.97760284}
+      scale: {x: 1.0000005, y: 1.0000018, z: 1.0000013}
+    - name: Perna.002.L
+      parentName: Perna.001.L
+      position: {x: -9.472733e-12, y: 0.002584484, z: 5.1589035e-11}
+      rotation: {x: -0.00021238245, y: 0.00017916098, z: -0.455986, w: 0.889987}
+      scale: {x: 1.0000165, y: 0.99999404, z: 1.0000029}
+    - name: Perna.003.L
+      parentName: Perna.002.L
+      position: {x: 6.1882016e-10, y: 0.001546969, z: -9.990799e-11}
+      rotation: {x: 0.00024625854, y: -0.00000007406924, z: -0.4178568, w: 0.90851283}
+      scale: {x: 0.999981, y: 1.0000172, z: 1.0000027}
+    - name: corpo.001
+      parentName: Armature.001
+      position: {x: -0, y: 0.00034160813, z: -0.00042662397}
+      rotation: {x: 0.7071067, y: 3.5527137e-15, z: -6.504459e-16, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
+    - name: corpo.003
+      parentName: corpo.001
+      position: {x: -0, y: 0.0028937513, z: 0}
+      rotation: {x: -0, y: -0.00000011920925, z: 3.5527137e-15, w: 1}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: "bra\xE7o.L"
+      parentName: corpo.003
+      position: {x: -0.0014497259, y: 0.006802973, z: -0.00026464026}
+      rotation: {x: -0.4525766, y: 0.4966891, z: 0.49668846, w: 0.5493404}
+      scale: {x: 1.0000026, y: 1.0000011, z: 1.0000014}
+    - name: "bra\xE7o.001.L"
+      parentName: "bra\xE7o.L"
+      position: {x: 7.4505804e-11, y: 0.0034339419, z: 3.72529e-10}
+      rotation: {x: -0.0073151, y: -0, z: 0.0010046215, w: 0.99997276}
+      scale: {x: 0.99999934, y: 1.0000007, z: 0.9999998}
+    - name: "m\xE3o.L"
+      parentName: "bra\xE7o.001.L"
+      position: {x: 1.4901161e-10, y: 0.0034339423, z: 7.4505804e-11}
+      rotation: {x: -0.061320048, y: 0.032580547, z: -0.36395276, w: 0.9288255}
+      scale: {x: 0.9999995, y: 1.0000011, z: 1.0000008}
+    - name: dedinhos.L
+      parentName: "m\xE3o.L"
+      position: {x: 0.00041128206, y: 0.0022811024, z: -1.4901161e-10}
+      rotation: {x: 0.122838214, y: -0.000000022351744, z: 0.00000016577543, w: -0.99242675}
+      scale: {x: 1.0000048, y: 1.0000045, z: 1.0000035}
+    - name: dedinhos.001.L
+      parentName: dedinhos.L
+      position: {x: 4.0978193e-10, y: 0.0008588813, z: -9.313225e-11}
+      rotation: {x: -0.14351027, y: 0.00000011838426, z: -0.00000005646745, w: 0.9896489}
+      scale: {x: 1.0000039, y: 1.0000046, z: 1.0000005}
+    - name: dedinhos.002.L
+      parentName: "m\xE3o.L"
+      position: {x: -0.00070980535, y: 0.0024311687, z: 3.7252902e-11}
+      rotation: {x: 0.122838214, y: -0.000000022351744, z: 0.00000016577543, w: -0.99242675}
+      scale: {x: 1.0000048, y: 1.0000045, z: 1.0000035}
+    - name: dedinhos.003.L
+      parentName: dedinhos.002.L
+      position: {x: 1.11758706e-10, y: 0.0008588818, z: 3.352761e-10}
+      rotation: {x: -0.14351042, y: 0.000000054525295, z: -0.00000008642473, w: 0.9896488}
+      scale: {x: 1.0000033, y: 1.0000036, z: 0.9999994}
+    - name: "ded\xE3o.L"
+      parentName: "m\xE3o.L"
+      position: {x: -0.0009569279, y: 0.00092680927, z: 0.000009752139}
+      rotation: {x: -0.3711309, y: 0.40126938, z: 0.46562144, w: 0.6960183}
+      scale: {x: 1.0000048, y: 1.000005, z: 1.0000024}
+    - name: "ded\xE3o.001.L"
+      parentName: "ded\xE3o.L"
+      position: {x: -2.3748725e-10, y: 0.0005329179, z: -8.381903e-11}
+      rotation: {x: 0.10640158, y: -0.16880858, z: -0.101012915, w: 0.97466856}
+      scale: {x: 1.0000046, y: 0.99999666, z: 1.0000035}
+    - name: "bra\xE7o.L.001"
+      parentName: "bra\xE7o.L"
+      position: {x: -7.4505804e-11, y: 0.0034339416, z: 0}
+      rotation: {x: 0.4525767, y: -0.49668908, z: -0.49668837, w: 0.5493405}
+      scale: {x: 0.99999994, y: 0.9999988, z: 0.999999}
+    - name: corpo.002
+      parentName: corpo.003
+      position: {x: -0.000010461844, y: 0.005025555, z: 0.0039590267}
+      rotation: {x: -0.24563986, y: -1.3415047e-11, z: 0.00000005861006, w: 0.9693612}
+      scale: {x: 1, y: 1.0000008, z: 1.0000005}
+    - name: "Cabe\xE7a"
+      parentName: corpo.003
+      position: {x: 6.050716e-17, y: 0.0075328723, z: 1.3038516e-10}
+      rotation: {x: -0.022869289, y: -0.000017526007, z: 0.0013625581, w: 0.9997375}
+      scale: {x: 1.0000008, y: 1.0000004, z: 1.0000001}
+    - name: Cabelinho
+      parentName: "Cabe\xE7a"
+      position: {x: -4.6566128e-12, y: 0.007193971, z: -1.7382631e-10}
+      rotation: {x: -0.38588756, y: 0.00035628173, z: -0.0017495301, w: 0.9225441}
+      scale: {x: 1.0000012, y: 0.99999994, z: 1.0000001}
+    - name: "cora\xE7\xE3o.L"
+      parentName: "Cabe\xE7a"
+      position: {x: -0.0016975568, y: 0.005864533, z: -0.0021601897}
+      rotation: {x: 0.9217206, y: -0.21238315, z: -0.08259174, w: -0.31385204}
+      scale: {x: 1.0000006, y: 1.0000057, z: 1.0000058}
+    - name: Chiquinha.001.L
+      parentName: "cora\xE7\xE3o.L"
+      position: {x: -1.11758706e-10, y: 0.0068441737, z: -5.2154064e-10}
+      rotation: {x: 0.013219357, y: 0.009029269, z: 0.005073026, w: 0.999859}
+      scale: {x: 0.9999999, y: 1.0000075, z: 1.0000063}
+    - name: Mecha.L
+      parentName: "Cabe\xE7a"
+      position: {x: -0.0031474994, y: 0.004328526, z: 0.0013757686}
+      rotation: {x: 0.0008102435, y: -0.035039723, z: 0.9989521, w: -0.029432887}
+      scale: {x: 1.000007, y: 1.0000015, z: 1.0000105}
+    - name: Mecha.001.L
+      parentName: Mecha.L
+      position: {x: 7.4505804e-11, y: 0.0024551472, z: 3.352761e-10}
+      rotation: {x: 0.22607951, y: 0.063109376, z: 0.2941936, w: 0.92647475}
+      scale: {x: 1.0000093, y: 1.0000032, z: 1.0000001}
+    - name: Mecha.L.001
+      parentName: "Cabe\xE7a"
+      position: {x: -0.002240397, y: 0.0064694807, z: 0.0010129235}
+      rotation: {x: -0.11071381, y: 0.19257669, z: 0.94977653, w: 0.22041155}
+      scale: {x: 1.0000043, y: 1.0000032, z: 1.0000008}
+    - name: Mecha.L.002
+      parentName: Mecha.L.001
+      position: {x: -0, y: 0.001725092, z: 0.0000000012293457}
+      rotation: {x: 0.06173971, y: 0.16199191, z: 0.57314694, w: 0.8009054}
+      scale: {x: 1.0000019, y: 1.0000072, z: 0.99999946}
+    - name: "cora\xE7\xE3o.R"
+      parentName: "Cabe\xE7a"
+      position: {x: 0.0017290548, y: 0.005855201, z: -0.002160524}
+      rotation: {x: 0.92230374, y: 0.20984143, z: 0.083356254, w: -0.31364667}
+      scale: {x: 1.0000011, y: 1.0000035, z: 1.0000046}
+    - name: Chiquinha.001.R
+      parentName: "cora\xE7\xE3o.R"
+      position: {x: -6.984919e-11, y: 0.0068441727, z: -3.4458936e-10}
+      rotation: {x: 0.013219267, y: -0.009029292, z: -0.0050730705, w: 0.999859}
+      scale: {x: 0.9999987, y: 1.0000035, z: 1.0000033}
+    - name: Mecha.L.003
+      parentName: "Cabe\xE7a"
+      position: {x: -0.0031474994, y: 0.004328526, z: 0.0013757686}
+      rotation: {x: -0.75754875, y: 0.000000013666977, z: 0.16049366, w: 0.6327414}
+      scale: {x: 1.0000006, y: 1.0000033, z: 1.0000029}
+    - name: Mecha.R
+      parentName: "Cabe\xE7a"
+      position: {x: 0.0031712998, y: 0.004311316, z: 0.0013751514}
+      rotation: {x: -0.0008073191, y: -0.03503452, z: 0.9988683, w: 0.03215668}
+      scale: {x: 1.0000113, y: 1.0000027, z: 1.0000107}
+    - name: Mecha.001.R
+      parentName: Mecha.R
+      position: {x: 1.862645e-10, y: 0.0024551465, z: 6.693881e-10}
+      rotation: {x: 0.22607906, y: -0.06310888, z: -0.29419273, w: 0.92647517}
+      scale: {x: 1.0000093, y: 1.000007, z: 1.0000007}
+    - name: Mecha.R.003
+      parentName: "Cabe\xE7a"
+      position: {x: 0.0031712998, y: 0.004311316, z: 0.0013751514}
+      rotation: {x: -0.7575615, y: 0.0021248343, z: -0.1621426, w: 0.63230205}
+      scale: {x: 1.0000008, y: 1.0000029, z: 1.0000025}
+    - name: Mecha.R.001
+      parentName: "Cabe\xE7a"
+      position: {x: 0.0021380915, y: 0.0061116903, z: 0.0015427087}
+      rotation: {x: 0.03132508, y: -0.032696262, z: 0.91539973, w: -0.3999914}
+      scale: {x: 1.000002, y: 1.0000017, z: 0.99999917}
+    - name: Mecha.R.002
+      parentName: Mecha.R.001
+      position: {x: 2.9802322e-10, y: 0.0010552579, z: 7.4505804e-11}
+      rotation: {x: 0.60347474, y: 0.1134154, z: -0.2870513, w: -0.7352257}
+      scale: {x: 1.0000069, y: 1.0000036, z: 0.9999983}
+    - name: Mecha.R.004
+      parentName: "Cabe\xE7a"
+      position: {x: -0.0014296083, y: 0.006510197, z: 0.002378033}
+      rotation: {x: -0.22661008, y: 0.24309531, z: 0.88794196, w: -0.3179807}
+      scale: {x: 1.0000023, y: 1.0000014, z: 1.000001}
+    - name: Mecha.R.005
+      parentName: Mecha.R.004
+      position: {x: 1.4901161e-10, y: 0.0018837794, z: 4.2840836e-10}
+      rotation: {x: 0.38455912, y: 0.07127695, z: -0.25027823, w: -0.8856606}
+      scale: {x: 1.000007, y: 0.9999991, z: 1.000003}
+    - name: Mecha.R.006
+      parentName: Mecha.R.005
+      position: {x: 8.9406965e-10, y: 0.0030001067, z: 0.000000001899898}
+      rotation: {x: -0.4343118, y: 0.11646698, z: 0.2945466, w: 0.8432384}
+      scale: {x: 1.0000048, y: 1.0000027, z: 0.9999955}
+    - name: "bra\xE7o.R"
+      parentName: corpo.003
+      position: {x: 0.0014497259, y: 0.006802973, z: -0.0002646411}
+      rotation: {x: -0.45257664, y: -0.49668902, z: -0.4966884, w: 0.5493406}
+      scale: {x: 1.0000025, y: 1.0000002, z: 1.0000013}
+    - name: "bra\xE7o.001.R"
+      parentName: "bra\xE7o.R"
+      position: {x: 9.685754e-10, y: 0.003433943, z: 1.4901161e-10}
+      rotation: {x: -0.0073155016, y: -0.00000011920929, z: -0.00100483, w: 0.9999728}
+      scale: {x: 0.9999979, y: 1.0000008, z: 1.0000004}
+    - name: "m\xE3o.R"
+      parentName: "bra\xE7o.001.R"
+      position: {x: -3.72529e-10, y: 0.0034339423, z: 2.2351741e-10}
+      rotation: {x: -0.047911268, y: -0.044571478, z: 0.10154216, w: 0.9926768}
+      scale: {x: 1.0000015, y: 1.0000014, z: 1.000001}
+    - name: dedinhos.R
+      parentName: "m\xE3o.R"
+      position: {x: -0.0004112815, y: 0.0022811026, z: 7.4505804e-11}
+      rotation: {x: 0.1228383, y: -0.00000008195641, z: -0.0000002586749, w: -0.99242675}
+      scale: {x: 1.0000049, y: 1.0000039, z: 1.000003}
+    - name: dedinhos.001.R
+      parentName: dedinhos.R
+      position: {x: 8.9406965e-10, y: 0.0008588816, z: 2.4214386e-10}
+      rotation: {x: -0.14351037, y: -0.00000008658687, z: -0.0000000224514, w: 0.9896489}
+      scale: {x: 1.0000018, y: 1.0000029, z: 1.0000013}
+    - name: dedinhos.002.R
+      parentName: "m\xE3o.R"
+      position: {x: 0.0007098065, y: 0.002431169, z: -1.11758706e-10}
+      rotation: {x: 0.07747416, y: 0.013191733, z: 0.0017334745, w: -0.99690557}
+      scale: {x: 1.0000055, y: 1.0000044, z: 1.0000033}
+    - name: dedinhos.003.R
+      parentName: dedinhos.002.R
+      position: {x: 1.4901161e-10, y: 0.00085888145, z: -1.0244548e-10}
+      rotation: {x: -0.14351034, y: 0.000000022266905, z: 0.00000007202942, w: 0.9896488}
+      scale: {x: 1.0000012, y: 1.0000018, z: 1.0000015}
+    - name: "ded\xE3o.R"
+      parentName: "m\xE3o.R"
+      position: {x: 0.0009569284, y: 0.000926809, z: 0.0000097524}
+      rotation: {x: 0.39582017, y: 0.39582026, z: 0.4485564, w: -0.69674236}
+      scale: {x: 1.0000044, y: 1.0000051, z: 1.0000033}
+    - name: "ded\xE3o.001.R"
+      parentName: "ded\xE3o.R"
+      position: {x: 1.094304e-10, y: 0.0005329176, z: 2.7939676e-10}
+      rotation: {x: 0.10640161, y: 0.16880865, z: 0.10101292, w: 0.9746685}
+      scale: {x: 1.0000043, y: 1.0000025, z: 1.0000054}
+    - name: Perna.ik.L..L
+      parentName: Armature.001
+      position: {x: -0.0013805345, y: 0.00070770056, z: -0.0044893357}
+      rotation: {x: 0.05998704, y: -0.70530164, z: 0.059726954, w: -0.7038351}
+      scale: {x: 1.0000006, y: 1.0000008, z: 1.0000015}
+    - name: Perna.ik.L..R
+      parentName: Armature.001
+      position: {x: 0.0013805345, y: 0.00070770056, z: -0.0037953355}
+      rotation: {x: -0.059987042, y: -0.7053017, z: 0.059727017, w: 0.70383507}
+      scale: {x: 1.0000006, y: 1.0000008, z: 1.0000014}
+    - name: "m\xE3o.ik.L"
+      parentName: Armature.001
+      position: {x: -0.008285207, y: 0.0006326074, z: 0.0012829321}
+      rotation: {x: -0, y: -0.000000004302183, z: -0.08593369, w: 0.9963008}
+      scale: {x: 0.99999934, y: 1.0000018, z: 1.000002}
+    - name: Alvo.L
+      parentName: Armature.001
+      position: {x: -0.004867466, y: 0.0014864084, z: 0.009603037}
+      rotation: {x: -0.00000008940697, y: -5.3290705e-15, z: 3.5527137e-15, w: 1}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: "m\xE3o.ik.R"
+      parentName: Armature.001
+      position: {x: 0.008285207, y: 0.0006326074, z: 0.0012829321}
+      rotation: {x: -0, y: 0.0000000031483967, z: 0.08593369, w: 0.9963008}
+      scale: {x: 0.9999997, y: 1.0000015, z: 1.0000015}
+    - name: Alvo.R
+      parentName: Armature.001
+      position: {x: 0.004867466, y: 0.0014864084, z: 0.009603037}
+      rotation: {x: -0.00000008940697, y: -5.3290705e-15, z: 3.5527137e-15, w: 1}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: "Cabe\xE7a"
+      parentName: Losing(Clone)
+      position: {x: -0.0065512583, y: 1.8840286, z: -0.02399869}
+      rotation: {x: -0.7071067, y: -0.000000030908616, z: 0.000000030908623, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cube
+      parentName: Losing(Clone)
+      position: {x: -0.92037153, y: 1.5391052, z: -0.066723265}
+      rotation: {x: -0.70696104, y: -0.01435833, z: 0.014358329, w: 0.706961}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder
+      parentName: Losing(Clone)
+      position: {x: -0.47618717, y: 1.6135489, z: -0.63321525}
+      rotation: {x: -0.32634032, y: 0.34097624, z: 0.03786405, w: 0.8807971}
+      scale: {x: 100, y: 100, z: 100.00001}
+    - name: Cylinder.001
+      parentName: Losing(Clone)
+      position: {x: -0.000000002483527, y: 1.1410182, z: -0.06603709}
+      rotation: {x: -0.7071067, y: -0.000000030908616, z: 0.000000030908623, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder.002
+      parentName: Losing(Clone)
+      position: {x: 2.527451e-33, y: 0.5666903, z: -0.06226356}
+      rotation: {x: -0.7071067, y: -0.000000030908616, z: 0.000000030908623, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder.003
+      parentName: Losing(Clone)
+      position: {x: -0.14664257, y: 0.53007776, z: -0.05791934}
+      rotation: {x: -0.70708567, y: 0.0054736948, z: -0.0054736948, w: 0.7070856}
+      scale: {x: 99.99999, y: 100, z: 99.99999}
+    - name: Cylinder.004
+      parentName: Losing(Clone)
+      position: {x: -0.2830247, y: 1.4707934, z: -0.07104787}
+      rotation: {x: 0.46848086, y: -0.52964675, z: 0.52964675, w: -0.46848086}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder.005
+      parentName: Losing(Clone)
+      position: {x: 2.9826432e-33, y: 1.1204737, z: -0.15552466}
+      rotation: {x: -0.7071067, y: -0.000000030908616, z: 0.000000030908623, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Franja
+      parentName: Losing(Clone)
+      position: {x: 0.00003929846, y: 2.1683288, z: 0.16223386}
+      rotation: {x: -0.00000003774895, y: 0.00000004371139, z: 1.7112915e-15, w: 1}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Franja.001
+      parentName: Losing(Clone)
+      position: {x: -0.2224699, y: 1.9335427, z: 0.2181994}
+      rotation: {x: 0.00000002302537, y: -0.19388899, z: -0.000000003779157, w: 0.9810235}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Mexa
+      parentName: Losing(Clone)
+      position: {x: 0.18937942, y: 2.1550148, z: 0.16180298}
+      rotation: {x: -0.05600723, y: 0.23263049, z: -0.009621074, w: 0.9709035}
+      scale: {x: 99.99999, y: 100, z: 100}
+    - name: Mexa.001
+      parentName: Losing(Clone)
+      position: {x: 0.31761038, y: 1.9909675, z: 0.08165214}
+      rotation: {x: 0.38214868, y: 0.3821486, z: 0.59494734, w: 0.5949475}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane
+      parentName: Losing(Clone)
+      position: {x: -0.000079146535, y: 1.3922917, z: 0.25395954}
+      rotation: {x: -0.2542911, y: 0.000000042274497, z: 0.000000011115417, w: 0.96712774}
+      scale: {x: 100, y: 100.00001, z: 100.00001}
+    - name: Plane.001
+      parentName: Losing(Clone)
+      position: {x: -0.008717896, y: 2.4670377, z: -0.28112108}
+      rotation: {x: -0.27727523, y: 0.2772747, z: 0.6504758, w: 0.65047556}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Plane.002
+      parentName: Losing(Clone)
+      position: {x: -0.009792343, y: 1.7969937, z: -0.4245042}
+      rotation: {x: 0.17327507, y: 0.17327623, z: -0.6855475, w: 0.6855478}
+      scale: {x: 100.00001, y: 100, z: 100.00001}
+    - name: Plane.003
+      parentName: Losing(Clone)
+      position: {x: -0.58316207, y: 1.4824569, z: -0.7540025}
+      rotation: {x: -0.052912816, y: 0.4714611, z: -0.72262144, w: 0.5027355}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Tiara
+      parentName: Losing(Clone)
+      position: {x: -0.0065512788, y: 1.9408107, z: -0.02264121}
+      rotation: {x: -0.7696613, y: -0.000000033642966, z: 0.00000002790764, w: 0.6384524}
+      scale: {x: 100, y: 100, z: 100}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 2
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
