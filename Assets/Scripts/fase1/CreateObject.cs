@@ -12,6 +12,8 @@ public class CreateObject : MonoBehaviour
     private float tempo = 0f;
     private int indiceSpawnVermelho, indiceSpawnAzul;
 
+    public bool terminouDeCriarMassas = false;
+
     // Update is called once per frame
     void Update()
     {
@@ -27,6 +29,11 @@ public class CreateObject : MonoBehaviour
             GameObject novoAzul = Instantiate(azul, spawn.position, spawn.rotation);
             Destroy(novoAzul, 10f);
             indiceSpawnAzul++;
+        }
+
+        if (indiceSpawnVermelho >= tempoVermelho.Length && indiceSpawnAzul >= tempoAzul.Length)
+        {
+            terminouDeCriarMassas = true;
         }
     }
 }

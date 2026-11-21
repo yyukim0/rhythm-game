@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using System.Collections.Generic;
+using System.Collections;
 
 public class Amassar : MonoBehaviour
 {
@@ -14,9 +15,15 @@ public class Amassar : MonoBehaviour
     public TMP_Text txtPontuacao;
 
     public int pontuacao = 0;
+    private float tempoDeFase = 0f;
+    private bool faseEncerrada = false;
+
+    private Animator animator;
 
     void Start() {
         pontuacao = 0;
+
+        animator = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -52,6 +59,15 @@ public class Amassar : MonoBehaviour
 
     void Update()
     {
+        if (!faseEncerrada)
+        {
+            tempoDeFase += Time.deltaTime;
+        }
+        if (tempoDeFase >= 10f && !faseEncerrada)
+        {
+            StartCoroutine(EncerrarFase());
+        }
+     
         txtPontuacao.text = pontuacao.ToString();
         
         for (int i = massasIndoProLixo.Count - 1; i >= 0; i--)
@@ -67,6 +83,11 @@ public class Amassar : MonoBehaviour
                     rb.MovePosition(rb.position + Vector3.back * 0.07f);
                 }
             }
+        }
+
+        if (faseEncerrada)
+        {
+            return;
         }
 
         GameObject massaAtual = GetMassaAtiva();
@@ -103,6 +124,7 @@ public class Amassar : MonoBehaviour
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame && massaAtual != null)
         {
             if (!massasAmassadas.Contains(massaAtual)) {
+                animator.SetTrigger("Amassar");
                 massaAtual.transform.localScale -= new Vector3(0f, 0.05f, 0f);
                 massaAtual.transform.position -= new Vector3(0f, 0f, 0.05f);
 
@@ -127,5 +149,21 @@ public class Amassar : MonoBehaviour
             }
         }
         return null;
+    }
+
+    private IEnumerator EncerrarFase()
+    {
+        faseEncerrada = true;
+
+        yield return new WaitForSeconds(5f);
+
+        if (pontuacao >= 1000)
+        {
+            animator.SetTrigger("Winning");
+        }
+        else
+        {
+            animator.SetTrigger("Losing");
+        }
     }
 }
