@@ -4,18 +4,26 @@ public class NewMonoBehaviourScript : MonoBehaviour
 {
     private float tempoDeVida = 0f;
     private bool mudouDeDirecao = false;
+    private Rigidbody rb;
 
-    void Update()
+    void Start()
     {
-        tempoDeVida += Time.deltaTime;
+        rb = GetComponent<Rigidbody>();
+    }
 
-        if (tempoDeVida < 5f)
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        tempoDeVida += Time.fixedDeltaTime;
+
+        if (tempoDeVida < 6f)
         {
-            transform.Translate(-0.01f, 0f, 0f); 
+            rb.MovePosition(rb.position + transform.right * 0.03f);
         }
+        /*
         else
         {
-            transform.Translate(0f, 0f, -0.01f); 
-        }
+            rb.MovePosition(rb.position + Vector3.back * 0.01f);
+        }*/
     }
 }

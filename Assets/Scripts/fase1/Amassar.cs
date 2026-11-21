@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using System.Collections.Generic;
+using System.Collections;
 
 public class Amassar : MonoBehaviour
 {
@@ -14,26 +15,32 @@ public class Amassar : MonoBehaviour
     public TMP_Text txtPontuacao;
 
     public int pontuacao = 0;
+    private float tempoDeFase = 0f;
+    private bool faseEncerrada = false;
+
+    private Animator animator;
 
     void Start() {
         pontuacao = 0;
+
+        animator = GetComponent<Animator>();
     }
 
-    private void OnTriggerEnter(Collider bater)
+    private void OnTriggerEnter(Collider other)
     {
-        if (bater.CompareTag("MassaVermelha") || bater.CompareTag("MassaAzul"))
+        if (other.CompareTag("MassaVermelha") || other.CompareTag("MassaAzul"))
         {
-            if(!massasNoTrigger.Contains(bater.gameObject)) {
-                massasNoTrigger.Add(bater.gameObject);
+            if(!massasNoTrigger.Contains(other.gameObject)) {
+                massasNoTrigger.Add(other.gameObject);
             }
         }
     }
 
-    private void OnTriggerExit(Collider bater)
+    private void OnTriggerExit(Collider other)
     {
-        if (bater.CompareTag("MassaVermelha") || bater.CompareTag("MassaAzul"))
+        if (other.CompareTag("MassaVermelha") || other.CompareTag("MassaAzul"))
         {
-            GameObject massaSaindo = bater.gameObject;
+            GameObject massaSaindo = other.gameObject;
 
             if(massasNoTrigger.Contains(massaSaindo)) {
                 bool foiAmassada = massasAmassadas.Contains(massaSaindo);
@@ -52,13 +59,35 @@ public class Amassar : MonoBehaviour
 
     void Update()
     {
+        if (!faseEncerrada)
+        {
+            tempoDeFase += Time.deltaTime;
+        }
+        if (tempoDeFase >= 10f && !faseEncerrada)
+        {
+            StartCoroutine(EncerrarFase());
+        }
+     
         txtPontuacao.text = pontuacao.ToString();
         
-        for (int i = massasIndoProLixo.Count - 1; i >= 0; i--) {
+        for (int i = massasIndoProLixo.Count - 1; i >= 0; i--)
+        {
             GameObject massas = massasIndoProLixo[i];
-            if (massas != null) {
-                massas.transform.Translate(0.01f, 0f, -0.05f);
+
+            if (massas != null)
+            {
+                Rigidbody rb = massas.GetComponent<Rigidbody>();
+
+                if (rb != null)
+                {
+                    rb.MovePosition(rb.position + Vector3.back * 0.07f);
+                }
             }
+        }
+
+        if (faseEncerrada)
+        {
+            return;
         }
 
         GameObject massaAtual = GetMassaAtiva();
@@ -74,8 +103,11 @@ public class Amassar : MonoBehaviour
                     pontuacao -= 50;
                 }
                 
-                massasIndoProLixo.Add(massaAtual);
-                massasNoTrigger.Remove(massaAtual);
+                if (!massasIndoProLixo.Contains(massaAtual))
+                {
+                    massasIndoProLixo.Add(massaAtual);
+                    massasNoTrigger.Remove(massaAtual);
+                }
                 
                 Debug.Log("jogou no lixo!");
             }
@@ -92,6 +124,7 @@ public class Amassar : MonoBehaviour
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame && massaAtual != null)
         {
             if (!massasAmassadas.Contains(massaAtual)) {
+                animator.SetTrigger("Amassar");
                 massaAtual.transform.localScale -= new Vector3(0f, 0.05f, 0f);
                 massaAtual.transform.position -= new Vector3(0f, 0f, 0.05f);
 
@@ -116,5 +149,21 @@ public class Amassar : MonoBehaviour
             }
         }
         return null;
+    }
+
+    private IEnumerator EncerrarFase()
+    {
+        faseEncerrada = true;
+
+        yield return new WaitForSeconds(5f);
+
+        if (pontuacao >= 1000)
+        {
+            animator.SetTrigger("Winning");
+        }
+        else
+        {
+            animator.SetTrigger("Losing");
+        }
     }
 }
