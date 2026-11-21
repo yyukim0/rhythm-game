@@ -12,6 +12,7 @@ public class Options : MonoBehaviour
 {                   //start é o "groovar"
     public TMP_Text start, options, exit, textOptions, volumeOptions, brightnessOptions, exitOptions, pressAnyKeyText;
     public Slider volumeSlider, brightnessSlider;
+    public CanvasGroup volumeSliderGroup, brightnessSliderGroup;
     public CanvasGroup brightnessOverlay;
     public AudioMixer masterMixer;
 
@@ -26,8 +27,17 @@ public class Options : MonoBehaviour
 
     public RectTransform backgroundMenu, backgroundOptions, telaAmarela;
     public float speedTransitionMenu;
-    public Image menuTop, menuBottom, deSelectedGroove, deSelectedOptions, deSelectedExit, selectedGroove, selectedOptions, selectedExit;
+    public Image menuTop, menuBottom, deSelectedGroove, deSelectedOptions, deSelectedExit, selectedGroove, selectedOptions, selectedExit, adjust1, 
+                 adjust2, adjust3, adjust4;
     public Image greenLine, yellowLine, blackLine, pinkBackground;
+
+    private RectTransform[] alimentos;
+    private Vector2 deslocamentoMouse; //matriz que pega a posição do mouse
+    private Vector2[] posicoesOriginais; 
+
+    //isso previne que o dotween faça merda e coloque varias animações simultaneas para o mesmo alimento
+    private Tween[] foodTweens; //pedi ajuda da IA porque estava dando errado
+    private Vector2 ultimoDeslocamento; //guarda o ultimo deslocamento aplicado
 
     void Start()
     {
@@ -48,6 +58,27 @@ public class Options : MonoBehaviour
         
         //esconde os elementos na tela no inicioj
         SetupInitialState();
+
+        GameObject[] objetos = GameObject.FindGameObjectsWithTag("Alimento"); //encontra objetos com a tag "alimento"
+
+        alimentos = new RectTransform[objetos.Length];
+        foodTweens = new Tween[alimentos.Length];
+
+        for (int i = 0; i < objetos.Length; i++)
+        {
+            alimentos[i] = objetos[i].GetComponent<RectTransform>(); //temos uma lista com todos os objetos com a tag "alimento"
+        }
+
+        posicoesOriginais = new Vector2[alimentos.Length];
+
+        for (int i = 0; i < alimentos.Length; i++)
+        {
+            if (alimentos[i] != null)
+            {
+                posicoesOriginais[i] = alimentos[i].anchoredPosition; //guarda as posições dos objetos
+            }
+        }
+
         //faz o texto de apertar qualquer tecla piscar
         if (pressAnyKeyText != null)
         {
@@ -57,6 +88,17 @@ public class Options : MonoBehaviour
 
     void Update()
     {
+        if (!isStarted)
+        {
+            CalculateMouseMovement();
+
+            if (Vector2.Distance(deslocamentoMouse, ultimoDeslocamento) > 0.1f)
+            {
+                ultimoDeslocamento = deslocamentoMouse;
+                MoveFoods();
+            }
+        }
+
         if(!isStarted && Input.anyKeyDown) {
             isStarted = true;
 
@@ -66,9 +108,24 @@ public class Options : MonoBehaviour
             }
             if (telaAmarela != null) 
             {
+                DOVirtual.DelayedCall(1f, () => //faz os alimentos desaparecerem um tempinho depois da tela amarela
+                {
+                    foreach (RectTransform alimento in alimentos)
+                    {
+                        if (alimento != null)
+                        {
+                            Image imagem = alimento.GetComponent<Image>();
+
+                            if (imagem != null)
+                            {
+                                imagem.DOFade(0f, 0.5f);
+                            }
+                        }
+                    }
+                });
                 telaAmarela.DOAnchorPosY(0f, speedTransitionMenu).SetEase(Ease.InQuart).OnComplete(() => { //background sobe
                     DOVirtual.DelayedCall(2f, () => {
-                        telaAmarela.DOAnchorPosY(-1080f, speedTransitionMenu).SetEase(Ease.InQuart);
+                        telaAmarela.DOAnchorPosY(-1200f, speedTransitionMenu).SetEase(Ease.InQuart);
                         ShowMainMenu(); //e após subir manda o resto dos fade in nos botões
                     });
                 });
@@ -85,6 +142,38 @@ public class Options : MonoBehaviour
             }
             else {
                 VisualMenuOptions();
+            }
+        }
+    }
+
+    Vector2 GetMouseDirection() //vai pegar a direção do mouse para os objetos na tela de press a button
+    {
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+
+        float mouseX = (mousePosition.x / Screen.width) * 2f - 1f;
+        float mouseY = (mousePosition.y / Screen.height) * 2f - 1f;
+
+        return new Vector2(mouseX, mouseY);
+    }
+
+    void CalculateMouseMovement()
+    {
+        Vector2 direcaoMouse = GetMouseDirection();
+
+        deslocamentoMouse = direcaoMouse * 15f; //intensidade que o objeto vai se mover de acordo com a direção do mouse
+    }
+
+    void MoveFoods()
+    {
+        for (int i = 0; i < alimentos.Length; i++)
+        {
+            if (alimentos[i] != null)
+            {
+                Vector2 novaPosicao = posicoesOriginais[i] + deslocamentoMouse; //calcula onde vai ser a nova posição da comida
+
+                foodTweens[i]?.Kill(); //mata a animação anterior desse elemento se uma nova foi feita
+
+                foodTweens[i] = alimentos[i].DOAnchorPos(novaPosicao, 0.35f).SetEase(Ease.OutQuad); //o dotween faz o efeito de levar a comida até lá
             }
         }
     }
@@ -114,6 +203,11 @@ public class Options : MonoBehaviour
 
         if (volumeSlider != null) volumeSlider.gameObject.SetActive(false);
         if (brightnessSlider != null) brightnessSlider.gameObject.SetActive(false);
+
+        adjust1.gameObject.SetActive(false);
+        adjust2.gameObject.SetActive(false);
+        adjust3.gameObject.SetActive(false);
+        adjust4.gameObject.SetActive(false);
     }
 
     void ShowMainMenu()
@@ -179,56 +273,58 @@ public class Options : MonoBehaviour
 
     void ShowOptionsScreen()
     {
-        // Faz Fade Out do menu principal e depois ativa o menu de opções com Fade In
-        start.DOFade(0f, 0.4f);
-        options.DOFade(0f, 0.4f);
-        menuTop.DOFade(0f, 0.4f);
-        menuBottom.DOFade(0f, 0.4f);
-        deSelectedGroove.DOFade(0f, 0.4f);
-        selectedOptions.DOFade(0f, 0.4f);
-        deSelectedExit.DOFade(0f, 0.4f);
-        exit.DOFade(0f, 0.4f).OnComplete(() => {
-            start.gameObject.SetActive(false);
-            options.gameObject.SetActive(false);
-            exit.gameObject.SetActive(false);
-            menuTop.gameObject.SetActive(false);
-            menuBottom.gameObject.SetActive(false);
+        backgroundMenu.gameObject.SetActive(false);
+        backgroundOptions.gameObject.SetActive(true);
 
-            selectedGroove.gameObject.SetActive(false);
-            selectedOptions.gameObject.SetActive(false);
-            selectedExit.gameObject.SetActive(false);
+        greenLine.rectTransform.DOAnchorPosX(0f, 2f).SetEase(Ease.InQuart).SetDelay(0.3f);
+        yellowLine.rectTransform.DOAnchorPosX(0f, 2f).SetEase(Ease.InQuart).SetDelay(0.5f);
+        blackLine.rectTransform.DOAnchorPosX(0f, 2f).SetEase(Ease.InQuart).SetDelay(0.7f);
+        pinkBackground.rectTransform.DOAnchorPosX(0f, 2f).SetEase(Ease.InQuart).SetDelay(0.9f);
 
-            deSelectedGroove.gameObject.SetActive(false);
-            deSelectedOptions.gameObject.SetActive(false);
-            deSelectedExit.gameObject.SetActive(false);
+        backgroundOptions.gameObject.SetActive(true);
+        // Ativa opções
+        textOptions.gameObject.SetActive(true);
+        volumeOptions.gameObject.SetActive(true);
+        brightnessOptions.gameObject.SetActive(true);
+        exitOptions.gameObject.SetActive(true);
+        volumeSlider.gameObject.SetActive(true);
+        brightnessSlider.gameObject.SetActive(true);
 
-            greenLine.rectTransform.DOAnchorPosX(0f, 2f).SetEase(Ease.InQuart).SetDelay(0.3f);
-            yellowLine.rectTransform.DOAnchorPosX(0f, 2f).SetEase(Ease.InQuart).SetDelay(0.5f);
-            blackLine.rectTransform.DOAnchorPosX(0f, 2f).SetEase(Ease.InQuart).SetDelay(0.7f);
-            pinkBackground.rectTransform.DOAnchorPosX(0f, 2f).SetEase(Ease.InQuart).SetDelay(0.9f);
+        textOptions.alpha = 0f;
+        volumeOptions.alpha = 0f;
+        brightnessOptions.alpha = 0f;
+        exitOptions.alpha = 0f;
+        volumeSliderGroup.alpha = 0f;
+        brightnessSliderGroup.alpha = 0f;
 
-            backgroundOptions.gameObject.SetActive(true);
-            // Ativa opções
-            textOptions.gameObject.SetActive(true);
-            volumeOptions.gameObject.SetActive(true);
-            brightnessOptions.gameObject.SetActive(true);
-            exitOptions.gameObject.SetActive(true);
+        adjust1.color = new Color(adjust1.color.r, adjust1.color.g, adjust1.color.b, 0f);
+        adjust2.color = new Color(adjust2.color.r, adjust2.color.g, adjust2.color.b, 0f);
+        adjust3.color = new Color(adjust3.color.r, adjust3.color.g, adjust3.color.b, 0f);
+        adjust4.color = new Color(adjust4.color.r, adjust4.color.g, adjust4.color.b, 0f);
 
-            textOptions.alpha = 0f;
-            volumeOptions.alpha = 0f;
-            brightnessOptions.alpha = 0f;
-            exitOptions.alpha = 0f;
+        adjust1.gameObject.SetActive(true);
+        adjust2.gameObject.SetActive(true);
+        adjust3.gameObject.SetActive(true);
+        adjust4.gameObject.SetActive(true);
 
-            textOptions.DOFade(1f, 1f).SetDelay(3f);
-            volumeOptions.DOFade(1f, 1f).SetDelay(3f);
-            brightnessOptions.DOFade(1f, 1f).SetDelay(3f);
-            exitOptions.DOFade(1f, 1f).SetDelay(3f);
-            menuTop.DOFade(1f, 1f).SetDelay(3f);
-
-            if (volumeSlider != null) volumeSlider.gameObject.SetActive(true);
-            if (brightnessSlider != null) brightnessSlider.gameObject.SetActive(true);                
-        
+        textOptions.DOFade(1f, 1f).SetDelay(3f);
+        volumeOptions.DOFade(1f, 1f).SetDelay(3f);
+        brightnessOptions.DOFade(1f, 1f).SetDelay(3f);
+        exitOptions.DOFade(1f, 1f).SetDelay(3f);
+        menuTop.DOFade(1f, 1f).SetDelay(3f);
+        //bota aqui
+        adjust1.DOFade(1f, 1f).SetDelay(2.8f);
+        adjust2.DOFade(1f, 1f).SetDelay(2.8f);
+        adjust3.DOFade(1f, 1f).SetDelay(2.8f);
+        adjust4.DOFade(1f, 1f).SetDelay(2.8f);
+        volumeSliderGroup.DOFade(1f, 1f).SetDelay(3.2f);
+        brightnessSliderGroup.DOFade(1f, 1f).SetDelay(3.2f).OnComplete(() =>
+        {
+            isMenuReady = true;
         });
+
+        if (volumeSlider != null) volumeSlider.gameObject.SetActive(true);
+        if (brightnessSlider != null) brightnessSlider.gameObject.SetActive(true);        
     }
 
     void HideOptionsScreen()
@@ -241,6 +337,15 @@ public class Options : MonoBehaviour
         volumeOptions.DOFade(0f, 0.4f).SetDelay(0.8f);
         brightnessOptions.DOFade(0f, 0.4f).SetDelay(0.8f);
         exitOptions.DOFade(0f, 0.4f).SetDelay(0.8f);
+
+        adjust1.DOFade(0f, 0.4f).SetDelay(0.8f);
+        adjust2.DOFade(0f, 0.4f).SetDelay(0.8f);
+        adjust3.DOFade(0f, 0.4f).SetDelay(0.8f);
+        adjust4.DOFade(0f, 0.4f).SetDelay(0.8f);
+
+        volumeSliderGroup.DOFade(0f, 0.4f).SetDelay(0.8f);
+        brightnessSliderGroup.DOFade(0f, 0.4f).SetDelay(0.8f);
+
         greenLine.rectTransform.DOAnchorPosX(1633f, 2f).SetEase(Ease.InQuart).SetDelay(0.3f);
         yellowLine.rectTransform.DOAnchorPosX(1633f, 2f).SetEase(Ease.InQuart).SetDelay(0.5f);
         blackLine.rectTransform.DOAnchorPosX(1633f, 2f).SetEase(Ease.InQuart).SetDelay(0.7f);
@@ -252,6 +357,11 @@ public class Options : MonoBehaviour
             volumeOptions.gameObject.SetActive(false);
             brightnessOptions.gameObject.SetActive(false);
             exitOptions.gameObject.SetActive(false);
+
+            adjust1.gameObject.SetActive(false);
+            adjust2.gameObject.SetActive(false);
+            adjust3.gameObject.SetActive(false);
+            adjust4.gameObject.SetActive(false);
 
             if (volumeSlider != null) volumeSlider.gameObject.SetActive(false);
             if (brightnessSlider != null) brightnessSlider.gameObject.SetActive(false);
@@ -365,8 +475,39 @@ public class Options : MonoBehaviour
         else if(selectedOption == 1)
         {
             isOption = true;
+            isMenuReady = false;
             selectedOption = 0;
-            ShowOptionsScreen();
+
+            ShowYellowScreen(() =>
+            {
+                ShowOptionsScreen();
+            });
+
+            // Fade Out do menu principal, simultaneamente à tela amarela.
+            start.DOFade(0f, 0.4f);
+            options.DOFade(0f, 0.4f);
+            menuTop.DOFade(0f, 0.4f);
+            menuBottom.DOFade(0f, 0.4f);
+            deSelectedGroove.DOFade(0f, 0.4f);
+            selectedOptions.DOFade(0f, 0.4f);
+            deSelectedExit.DOFade(0f, 0.4f);
+
+            exit.DOFade(0f, 0.4f).OnComplete(() =>
+            {
+                start.gameObject.SetActive(false);
+                options.gameObject.SetActive(false);
+                exit.gameObject.SetActive(false);
+                menuTop.gameObject.SetActive(false);
+                menuBottom.gameObject.SetActive(false);
+
+                selectedGroove.gameObject.SetActive(false);
+                selectedOptions.gameObject.SetActive(false);
+                selectedExit.gameObject.SetActive(false);
+
+                deSelectedGroove.gameObject.SetActive(false);
+                deSelectedOptions.gameObject.SetActive(false);
+                deSelectedExit.gameObject.SetActive(false);
+            });
         }
         else if(selectedOption == 2) 
         {
@@ -455,5 +596,30 @@ public class Options : MonoBehaviour
         // if(selectedOption == 0) volumeOptions.font = fontRegular;
         // if(selectedOption == 1) brightnessOptions.font = fontRegular;
         // if(selectedOption == 2) exitOptions.font = fontRegular;
+    }
+
+    void ShowYellowScreen(System.Action onComplete)
+    {
+        telaAmarela.DOAnchorPosY(0f, speedTransitionMenu)
+            .SetEase(Ease.InQuart)
+            .OnComplete(() =>
+            {
+                // Troca o background enquanto a tela amarela cobre tudo.
+                backgroundMenu.gameObject.SetActive(false);
+                backgroundOptions.gameObject.SetActive(true);
+
+                DOVirtual.DelayedCall(2f, () =>
+                {
+                    // Faz a tela amarela descer.
+                    telaAmarela.DOAnchorPosY(-1200f, speedTransitionMenu)
+                        .SetEase(Ease.InQuart)
+                        .OnComplete(() =>
+                        {
+                            // Só depois que a tela amarela sair,
+                            // começa a animação das opções.
+                            onComplete?.Invoke();
+                        });
+                });
+            });
     }
 }   
